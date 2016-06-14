@@ -6,8 +6,15 @@ pom.xml
 /classes/
 /out/
 /target/
+/checkouts/
+*.classes
+/.lein-*
 .lein-deps-sum
 .lein-repl-history
 .lein-plugins/
-.repl
-.nrepl-port
+/.repl
+/.nrepl-port
+/out
+/*.log
+/.env
+.DS_Store

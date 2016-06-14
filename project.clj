@@ -8,10 +8,11 @@
   
   :dependencies [[org.clojure/clojure "1.8.0"]
                  [org.clojure/clojurescript "1.8.51"]
-                 [org.clojure/core.async "0.2.374"
+                 [org.clojure/core.async "0.2.382"
                   :exclusions [org.clojure/tools.reader]]
                  [reagent "0.5.1"]
-                 [cljs-ajax "0.5.5"]]
+                 ;;[cljs-ajax "0.5.5"]
+                 [cljs-http "0.1.41"]]
   
   :plugins [[lein-figwheel "0.5.4-2"]
             [lein-cljsbuild "1.1.3" :exclusions [[org.clojure/clojure]]]]

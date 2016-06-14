@@ -1,6 +1,10 @@
 (ns zipcodes-clientside.core
+  (:require-macros [cljs.core.async.macros :refer [go]])
   (:require [reagent.core :as reagent :refer [atom]]
-            [ajax.core :as ajax]))
+            ;;[ajax.core :as ajax]
+            [cljs-http.client :as http]
+            [cljs.core.async :refer [<!]]
+            ))
 
 (enable-console-print!)
 
@@ -8,9 +12,29 @@
 
 ;; define your app data so that it doesn't get over-written on reload
 
-(defonce app-state* (atom {:text "Hello world!"}))
+(defonce app-state* (atom {:text "hello kittens!"}))
 
-(defn- get-all-zips
+;; display paginated results from the API using the cljs-http library
+
+
+(defn- get-zipcodes[]
+  (go (let [response (<! (http/get "http://localhost:3000/zipcode/all"
+                                   {:with-credentials? false
+                                    :query-params {:offset 45
+                                                   :limit 2}}))]
+        (prn (:body response)))))
+
+
+(defn hello-world []
+  (get-zipcodes)
+  [:h1 (:text @app-state*)])
+
+
+
+;; the following two functions display paginated results from my api
+;; using the cljs-ajax library
+
+#_(defn- get-all-zips
   []
   (ajax/GET "http://localhost:3000/zipcode/all"
             {:handler (fn [zip-codes]
@@ -21,7 +45,7 @@
              :format :transit
              :response-format :transit}))
 
-(defn hello-world
+#_(defn hello-world
   []
   (get-all-zips)
   (fn []
@@ -31,6 +55,9 @@
                         ^{:key (:_id z)}
                         [:li (str (:city z) ", " (:state z) " " (:_id z))])
                       (:zip-codes @app-state*)))]]))
+
+
+;; this renders the function hello-world
 
 (reagent/render-component [hello-world]
                           (. js/document (getElementById "app")))
