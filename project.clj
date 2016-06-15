@@ -12,7 +12,8 @@
                   :exclusions [org.clojure/tools.reader]]
                  [reagent "0.5.1"]
                  ;;[cljs-ajax "0.5.5"]
-                 [cljs-http "0.1.41"]]
+                 [cljs-http "0.1.41"]
+                 [garden "1.3.2"]]
   
   :plugins [[lein-figwheel "0.5.4-2"]
             [lein-cljsbuild "1.1.3" :exclusions [[org.clojure/clojure]]]]
@@ -96,9 +97,9 @@
                    ;; need to add dev source path here to get user.clj loaded
                    :source-paths ["src" "dev"]
                    ;; for CIDER
-                   ;; :plugins [[cider/cider-nrepl "0.12.0"]]
+                   :plugins [[cider/cider-nrepl "0.12.0"]]
                    :repl-options {; for nREPL dev you really need to limit output
-                                  :init (set! *print-length* 50)
+                                  ;;:init (set! *print-length* 50)
                                   :nrepl-middleware [cemerick.piggieback/wrap-cljs-repl]}}}
 
 )
