@@ -17,18 +17,12 @@
 ;; display paginated results from the API using the cljs-http library
 
 
-(defn- get-zipcodes[]
+(defn- get-zipcodes []
   (go (let [response (<! (http/get "http://localhost:3000/zipcode/all"
                                    {:with-credentials? false
                                     :query-params {:offset 45
-                                                   :limit 2}}))]
-        (prn (:body response)))))
-
-
-(defn hello-world []
-  (get-zipcodes)
-  [:h1 (:text @app-state*)])
-
+                                                   :limit 290}}))]
+        (swap! app-state* assoc :zip-codes (:body response)))))
 
 
 ;; the following two functions display paginated results from my api
@@ -45,9 +39,9 @@
              :format :transit
              :response-format :transit}))
 
-#_(defn hello-world
+(defn hello-world
   []
-  (get-all-zips)
+  (get-zipcodes)
   (fn []
     [:div
      [:h1 (:text @app-state*)]
