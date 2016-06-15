@@ -12,23 +12,22 @@
 
 ;; define your app data so that it doesn't get over-written on reload
 
-(defonce app-state* (atom {:text "hello kittens!"}))
+(defonce app-state* (atom {:offset 2 :limit 12}))
 
-;; display paginated results from the API using the cljs-http library
-
+;; displays paginated results from the API using the cljs-http library
 
 (defn- get-zipcodes []
   (go (let [response (<! (http/get "http://localhost:3000/zipcode/all"
                                    {:with-credentials? false
-                                    :query-params {:offset 45
-                                                   :limit 290}}))]
+                                    :query-params {:offset (get @app-state* :offset)
+                                                   :limit  (get @app-state* :limit)}
+                                    }))]
         (swap! app-state* assoc :zip-codes (:body response)))))
 
 
-;; the following two functions display paginated results from my api
-;; using the cljs-ajax library
+;; displays paginated results clientside from api using cljs-ajax library
 
-#_(defn- get-all-zips
+#_(defn- get-zipcodes
   []
   (ajax/GET "http://localhost:3000/zipcode/all"
             {:handler (fn [zip-codes]
@@ -39,12 +38,15 @@
              :format :transit
              :response-format :transit}))
 
+;; this is the reagent component that displays the paginated results!
+
+(def input-limit )
 (defn hello-world
   []
   (get-zipcodes)
   (fn []
     [:div
-     [:h1 (:text @app-state*)]
+     [:h1 "ZIPCODES"]
      [:ol (doall (map (fn [z]
                         ^{:key (:_id z)}
                         [:li (str (:city z) ", " (:state z) " " (:_id z))])
@@ -60,5 +62,5 @@
 (defn on-js-reload []
   ;; optionally touch your app-state to force rerendering depending on
   ;; your application
-  ;; (swap! app-state update-in [:__figwheel_counter] inc)
+  ;;(swap! app-state* update-in [:__figwheel_counter] inc)
 )
