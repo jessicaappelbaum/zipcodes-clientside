@@ -1,3 +1,6 @@
+
+
+
 (defproject zipcodes-clientside "0.1.0-SNAPSHOT"
   :description "FIXME: write this!"
   :url "http://example.com/FIXME"
@@ -15,8 +18,15 @@
                  [cljs-http "0.1.41"]
                  [garden "1.3.2"]]
   
-  :plugins [[lein-figwheel "0.5.4-2"]
+  :plugins [[lein-figwheel "0.5.4-2"]            
             [lein-cljsbuild "1.1.3" :exclusions [[org.clojure/clojure]]]]
+
+
+  :garden {:builds [{:id "clientside"
+                     :source-paths ["src/clj/"]
+                     :stylesheet styles/zipcss
+                     :compiler {:output-to "resources/public/css/style.css"
+                                :pretty-print? true}}]}
 
   :source-paths ["src"]
 
@@ -51,7 +61,7 @@
                            :optimizations :advanced
                            :pretty-print false}}]}
 
-  :figwheel {;; :http-server-root "public" ;; default and assumes "resources"
+  :figwheel { ;; :http-server-root "public" ;; default and assumes "resources"
              ;; :server-port 3449 ;; default
              ;; :server-ip "127.0.0.1"
 
@@ -97,9 +107,11 @@
                    ;; need to add dev source path here to get user.clj loaded
                    :source-paths ["src" "dev"]
                    ;; for CIDER
-                   :plugins [[cider/cider-nrepl "0.12.0"]]
-                   :repl-options {; for nREPL dev you really need to limit output
+                   :plugins [[cider/cider-nrepl "0.12.0"]
+                             [lein-garden "0.2.8"]]               
+                   :repl-options { ; for nREPL dev you really need to limit output
                                   ;;:init (set! *print-length* 50)
                                   :nrepl-middleware [cemerick.piggieback/wrap-cljs-repl]}}}
 
-)
+  )
+

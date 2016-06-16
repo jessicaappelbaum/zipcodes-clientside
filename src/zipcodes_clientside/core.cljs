@@ -3,8 +3,9 @@
   (:require [reagent.core :as reagent :refer [atom]]
             ;;[ajax.core :as ajax]
             [cljs-http.client :as http]
-            [cljs.core.async :refer [<!]]
-            ))
+            [cljs.core.async :refer [<!]]))
+
+
 
 (enable-console-print!)
 
@@ -12,7 +13,7 @@
 
 (defonce app-state* (reagent/atom {:offset 0 :limit 20}))
 
-;; displays paginated results from the API using the cljs-http library
+;; get/all -  paginated results from the API using the cljs-http library
 
 (defn- get-zipcodes []
   (go (let [response (<! (http/get "http://localhost:3000/zipcode/all" 
@@ -20,7 +21,6 @@
                                     :query-params {:offset (get @app-state* :offset)
                                                    :limit  (get @app-state* :limit)}}))]
         (swap! app-state* assoc :zip-codes (:body response)))))
-
 
 ;; this is the reagent component that displays the paginated results!
 
