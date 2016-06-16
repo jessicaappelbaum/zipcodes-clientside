@@ -6,10 +6,13 @@
 (defstyles zipcss
   [:body {:font-family "courier new"
           :background-color :grey
-          :width (px 750)
+          :width (px 1100)
           :margin {:left :auto
                    :right :auto
                    :top (px 100)}}]
+
+  [:div.left {:width (px 600)
+              :float :left}]
   
   [:h1 {:border-bottom :solid
         :color :white
@@ -18,6 +21,7 @@
         :font-size (px 70)}]
 
   [:button {:background-color :grey
+            :outline :none
             :color :white
             :line-height (px 40)
             :width (px 46)
@@ -34,6 +38,7 @@
      :opacity 0.5}]]
 
   [:input {:color :white
+           :outline :none
            :padding-left (px 15)
            :border {:radius (px 15)
                     :style :solid
@@ -43,10 +48,10 @@
            :width (px 100)
            :opacity 0.7
            :background-color :orange
-           :margin-bottom (px 30)}]
+           :margin-bottom (px 10)}]
 
   [:pre {:font-size (px 18)
-         :margin-top (px 50)}]
+         :margin-top (px 20)}]
 
   [:ol {:line-height (px 30)
         :font-size (px 18)
@@ -55,4 +60,5 @@
                   :left (px 80)}
         :background-color :white
         :width (px 360)
-        :opacity 0.7}])
+        :opacity 0.7
+        :float :right}])

@@ -51,7 +51,7 @@
                         (println @app-state*))} title])
 
 (defn- jump-page []
-  [:div [:pre "jump to page"]
+  [:div [:pre "enter a page number you want to jump to:"]
    [:input {:type "text"
             :on-change (fn [e]
                          (swap! app-state* assoc :offset
@@ -62,13 +62,13 @@
 (defn app []
   (get-zipcodes)
   (fn []
-    [:div
-     [:h1 "zipcodes"]
-     (per-page)
-     (list-zipcodes)
-     (page-button previous-page "<")
-     (page-button next-page ">")
-     (jump-page)]))
+    [:div [:h1 "zipcodes"]
+     [:div.left
+      (per-page)
+      (jump-page)
+      (page-button previous-page "<")
+      (page-button next-page ">")]
+     (list-zipcodes)]))
 
 
 ;; this renders the function app 
