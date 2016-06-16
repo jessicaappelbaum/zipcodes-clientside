@@ -66,8 +66,8 @@
      [:h1 "zipcodes"]
      (per-page)
      (list-zipcodes)
-     (page-button previous-page "previous")
-     (page-button next-page "next")
+     (page-button previous-page "<")
+     (page-button next-page ">")
      (jump-page)]))
 
 

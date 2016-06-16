@@ -1,3 +1,66 @@
 body {
-  font-family: sans-serif;
+  font-family: courier new;
+  background-color: grey;
+  width: 750px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 100px;
+}
+
+h1 {
+  border-bottom: solid;
+  color: white;
+  opacity: 0.7;
+  padding-bottom: 20px;
+  font-size: 70px;
+}
+
+button {
+  line-height: 40px;
+  width: 46px;
+  border-width: 2px;
+  border-color: white;
+  font-family: helvetica;
+  margin-right: 20px;
+  border-style: solid;
+  margin-top: 30px;
+  font-size: 25px;
+  background-color: grey;
+  border-radius: 40px;
+  color: white;
+}
+
+button:hover {
+  background-color: orange;
+  opacity: 0.5;
+}
+
+input {
+  line-height: 26px;
+  width: 100px;
+  border-color: white;
+  border-style: solid;
+  margin-bottom: 30px;
+  font-size: 20px;
+  background-color: orange;
+  border-radius: 15px;
+  color: white;
+  padding-left: 15px;
+  opacity: 0.7;
+}
+
+pre {
+  font-size: 18px;
+  margin-top: 50px;
+}
+
+ol {
+  line-height: 30px;
+  font-size: 18px;
+  padding-top: 40px;
+  padding-bottom: 40px;
+  padding-left: 80px;
+  background-color: white;
+  width: 360px;
+  opacity: 0.7;
 }
